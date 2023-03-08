@@ -1,24 +1,29 @@
 import React from 'react';
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import NewsPage from './News';
-import PieceOfNews from './PieceOfNews';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import StoriesPage from './Stories';
+import Story from './Story';
+import Layout from './Layout';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <NewsPage />,
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <StoriesPage />,
+      },
+      {
+        path: '/:id',
+        element: <Story />,
+      },
+    ],
   },
-  {
-    path: '/:id',
-    element: <PieceOfNews />,
-  }
-])
-const Routing: React.FC = () => {
-  // todo: add reset scroll hook here
+]);
 
+const Routing: React.FC = () => {
   return (
-    <RouterProvider router={router} />
-  )
-}
+    <RouterProvider router={router} />    
+  );
+};
 
 export default Routing;

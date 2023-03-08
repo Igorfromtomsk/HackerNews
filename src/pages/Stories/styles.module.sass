@@ -1,0 +1,41 @@
+.headerRow
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  position: sticky
+  top: 0
+  margin-top: -50px
+  padding: 50px 0
+  border-bottom: 1px solid #1976d212
+  background-color: white
+
+.storiesWrapper,
+.stories
+  display: flex
+  flex-direction: column
+
+.storiesWrapper
+  gap: 30px
+  position: relative
+
+.stories
+  gap: 10px
+
+.title
+  margin: 0
+  font-family: 'Playfair Display', serif
+  font-size: 64px
+  flex-grow: 2
+
+.spin
+  animation: 2s spin infinite
+
+@keyframes spin 
+  0%
+    transform: rotate(0)
+  
+  50%
+    transform: rotate(-180deg)
+  
+  100%
+    transform: rotate(-360deg)
