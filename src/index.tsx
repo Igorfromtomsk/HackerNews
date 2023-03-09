@@ -11,9 +11,11 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <Provider store={store}>
-    <Routing />
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <Routing />
+    </Provider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
