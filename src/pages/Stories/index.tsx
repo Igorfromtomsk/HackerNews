@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../../redux';
 import { updateStoriesIds } from '../../redux/stories';
+import StoryComponent from './Story';
 
 let timer: NodeJS.Timeout | null = null
 const GET_STORIES_TIMEOUT = 60 * 1000; // 60sec 1000ms
@@ -16,7 +17,7 @@ const StoriesPage: React.FC = () => {
   const [ getStories, stories ] = useApi<number[]>(getStoriesRequest, []);
   const [ isLoading, setLoading ] = useState(false);
 
-  const { ids } = useSelector((state: State) => state.stories);
+  const { ids, objects } = useSelector((state: State) => state.stories);
   const dispatch = useDispatch();
 
   /** Makes a request for stories and repeat it by GET_STORIES_TIMEOUT */
@@ -40,10 +41,12 @@ const StoriesPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(updateStoriesIds(stories));
+    if (stories.length) {
+      dispatch(updateStoriesIds(stories));
+    }
   }, [ stories ]);
 
-  const renderStoriesList = () => ids.map(storyId => <div key={storyId}>{storyId}</div>);
+  const renderStoriesList = () => ids.map(storyId => <StoryComponent key={storyId} id={storyId} />);
 
   return (
     <div className={s.storiesWrapper}>

@@ -8,6 +8,7 @@
   padding: 50px 0
   border-bottom: 1px solid #1976d212
   background-color: white
+  z-index: 1
 
 .storiesWrapper,
 .stories
@@ -19,7 +20,32 @@
   position: relative
 
 .stories
-  gap: 10px
+  gap: 50px
+
+.story
+  cursor: pointer
+  transition: .25s ease
+  color: black
+  text-decoration: none
+
+  &:hover
+    color: #3f50b5
+
+.storyTitle
+  font-family: 'Playfair Display', serif
+  font-size: 32px
+  margin: 0
+
+.info
+  opacity: .5
+  display: flex
+  gap: 15px
+  position: relative
+
+  & > span:not(:last-child):after
+    content: '/'
+    position: relative
+    left: 7px
 
 .title
   margin: 0

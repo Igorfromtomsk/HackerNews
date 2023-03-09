@@ -1,4 +1,1 @@
-export interface Action {
-  type: string;
-  payload?: any;
-}
+export type ItemType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
