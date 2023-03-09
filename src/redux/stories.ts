@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Story } from '../../libs/types/stories';
+import { Story } from '../libs/types/stories';
 
 export interface StoriesState {
   ids: number[];
@@ -20,10 +20,6 @@ export const storiesSlice = createSlice({
     },
     setStoryToRedux: (state, action) => {
       const story = action.payload;
-      console.log('-', {
-        story,
-        id: story.id,
-      })
       state.objects[story.id] = story;
     }
   }

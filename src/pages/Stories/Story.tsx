@@ -1,4 +1,4 @@
-import { Box, Grid, Skeleton, Typography } from '@mui/material';
+import { Skeleton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,9 @@ import { getStoryByIdRequest } from '../../api/stories';
 import { Story } from '../../libs/types/stories';
 import { State } from '../../redux';
 import { setStoryToRedux } from '../../redux/stories';
+import FormattedTime from '../../shared/Date';
 import s from './styles.module.sass';
+import shared from '../../libs/styles/shared.module.sass';
 
 interface StoryProps {
   id: number;
@@ -42,10 +44,10 @@ const StoryComponent: React.FC<StoryProps> = ({ id }) => {
     <Skeleton variant="rectangular" height={50} />
   ) : (
     <Link to={`/${storyState.id}`} className={s.story}>
-      <h3 className={s.storyTitle}>{storyState.title}</h3>
+      <h3 className={shared.title}>{storyState.title}</h3>
       <div className={s.info}>
         <span>{storyState.by}</span>
-        <span>{new Date(1175714200 * 1000).toDateString()}</span>
+        <FormattedTime time={storyState.time} />
         <span>{storyState.score}</span>
       </div>
     </Link>

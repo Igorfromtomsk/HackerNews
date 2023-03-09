@@ -1,0 +1,56 @@
+.storyHeader
+  position: sticky
+  top: 0
+
+.headerRow
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.infoRow
+  padding: 20px 0
+  color: #757ce8
+  display: flex
+  gap: 20px
+  align-items: center
+
+.commentInner
+  display: flex
+  gap: 5px
+
+.author
+  color: #757ce8
+
+.comments
+  display: flex
+  flex-direction: column
+  gap: 20px
+  padding-top: 20px
+
+.comment
+  padding: 15px
+
+div.commentWrapper
+  box-shadow: none
+  padding: 5px 0
+
+  \:global
+    .MuiButtonBase-root
+      padding: 0
+
+    .MuiAccordionSummary-expandIconWrapper
+      align-self: flex-start
+      margin-top: 12px
+
+    .MuiAccordionSummary-content
+      transition: .25s ease background-color
+      cursor: pointer
+      border-radius: 5px
+      margin: 0
+
+      &:hover
+        background-color: #eee
+
+.commentsSummery
+  display: flex
+  gap: 5px

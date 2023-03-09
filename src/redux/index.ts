@@ -1,15 +1,18 @@
 import StoriesReducer, { StoriesState } from './stories';
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import CommentsReducer, { CommentsState } from './comments';
+import thunk from 'redux-thunk'
 
 export interface State {
   stories: StoriesState;
+  comments: CommentsState;
 }
 
-const reducer = combineReducers({ stories: StoriesReducer });
 export const store = configureStore({
   reducer: {
     stories: StoriesReducer,
-  }
+    comments: CommentsReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>

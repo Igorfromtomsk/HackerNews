@@ -4,6 +4,7 @@ import { getStoriesRequest } from '../../api/stories';
 import useApi from '../../libs/hooks/useApi';
 import CachedIcon from '@mui/icons-material/Cached';
 import s from './styles.module.sass';
+import shared from '../../libs/styles/shared.module.sass';
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../../redux';
@@ -17,7 +18,7 @@ const StoriesPage: React.FC = () => {
   const [ getStories, stories ] = useApi<number[]>(getStoriesRequest, []);
   const [ isLoading, setLoading ] = useState(false);
 
-  const { ids, objects } = useSelector((state: State) => state.stories);
+  const { ids } = useSelector((state: State) => state.stories);
   const dispatch = useDispatch();
 
   /** Makes a request for stories and repeat it by GET_STORIES_TIMEOUT */
@@ -38,6 +39,12 @@ const StoriesPage: React.FC = () => {
 
   useEffect(() => {
     getStoriesTimeToTime();
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -50,8 +57,8 @@ const StoriesPage: React.FC = () => {
 
   return (
     <div className={s.storiesWrapper}>
-      <div className={s.headerRow}>
-        <h3 className={s.title}>New and top stories!</h3>
+      <div className={classNames(s.headerRow, shared.stickyHeader)}>
+        <h3 className={classNames(s.mainTitle, shared.title)}>New and top stories!</h3>
         <Button
           variant="contained"
           disabled={isLoading}
