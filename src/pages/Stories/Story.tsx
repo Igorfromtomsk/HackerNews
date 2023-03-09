@@ -9,6 +9,7 @@ import { setStoryToRedux } from '../../redux/stories';
 import FormattedTime from '../../shared/Date';
 import s from './styles.module.sass';
 import shared from '../../libs/styles/shared.module.sass';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 interface StoryProps {
   id: number;
@@ -48,7 +49,7 @@ const StoryComponent: React.FC<StoryProps> = ({ id }) => {
       <div className={s.info}>
         <span>{storyState.by}</span>
         <FormattedTime time={storyState.time} />
-        <span>{storyState.score}</span>
+        <span className={s.score}>{storyState.score} <StarBorderIcon sx={{ height: 15}} /></span>
       </div>
     </Link>
   )

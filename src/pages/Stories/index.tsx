@@ -2,7 +2,8 @@ import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { getStoriesRequest } from '../../api/stories';
 import useApi from '../../libs/hooks/useApi';
-import CachedIcon from '@mui/icons-material/Cached';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import CircularProgress from '@mui/material/CircularProgress';
 import s from './styles.module.sass';
 import shared from '../../libs/styles/shared.module.sass';
 import classNames from 'classnames';
@@ -56,13 +57,13 @@ const StoriesPage: React.FC = () => {
   const renderStoriesList = () => ids.map(storyId => <StoryComponent key={storyId} id={storyId} />);
 
   return (
-    <div className={s.storiesWrapper}>
+    <div className={s.storiesContainer}>
       <div className={classNames(s.headerRow, shared.stickyHeader)}>
         <h3 className={classNames(s.mainTitle, shared.title)}>New and top stories!</h3>
         <Button
           variant="contained"
           disabled={isLoading}
-          endIcon={<CachedIcon className={classNames({ [s.spin]: isLoading })} />}
+          endIcon={isLoading ? <CircularProgress size={20} className={shared.loadingIcon}  /> : <RefreshIcon />}
           sx={{ height: 36 }}
           onClick={refreshImmediately}
         >

@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
-import React, { useMemo, useCallback, useEffect } from 'react';
+import { Button, CircularProgress } from '@mui/material';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { State } from '../../redux';
@@ -7,7 +7,7 @@ import FormattedTime from '../../shared/Date';
 import shared from '../../libs/styles/shared.module.sass';
 import s from './styles.module.sass';
 import storiesStyles from '../Stories/styles.module.sass';
-import CommentIcon from '@mui/icons-material/Comment';
+import ChatIcon from '@mui/icons-material/Chat';
 import { isValidUrl, withRightPlural } from '../../libs/helpers';
 import { getCommentById } from '../../api/stories';
 import CommentComponent from './Comment';
@@ -16,6 +16,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 const Story: React.FC = () => {
+  const [ isLoading, setLoading ] = useState(false);
   const stories = useSelector((state: State) => state.stories);
   const comments = useSelector((state: State) => state.comments);
   const { id } = useParams();
@@ -40,8 +41,10 @@ const Story: React.FC = () => {
   const getCommentsByList = useCallback((list: number[], withoutCache = false) => {
     list.forEach(id => {
       if (withoutCache || !comments.objects[id]) {
+        setLoading(true);
         getCommentById(id).then(res => {
-          dispatch(setCommentToRedux(res))
+          dispatch(setCommentToRedux(res));
+          setLoading(false);
         });
       }
     });
@@ -73,13 +76,14 @@ const Story: React.FC = () => {
             <span className={s.commentsSummery}>
               <span>{story.descendants}</span>
               <span>{withRightPlural(story.descendants, 'comment', 's')}</span>
-              <CommentIcon />
+              <ChatIcon sx={{ height: 15, marginLeft: -1 }} />
             </span>
             <Button
               variant="contained"
               sx={{ height: 36 }}
               onClick={refreshComments}
-              endIcon={<RefreshIcon />}
+              endIcon={isLoading ? <CircularProgress size={20} className={shared.loadingIcon}  /> : <RefreshIcon />}
+              disabled={isLoading}
             >
               Refresh
             </Button>

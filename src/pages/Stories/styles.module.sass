@@ -3,14 +3,15 @@
   justify-content: flex-end
   align-items: center
 
-.storiesWrapper,
+.storiesContainer,
 .stories
   display: flex
   flex-direction: column
 
-.storiesWrapper
+.storiesContainer
   gap: 30px
   position: relative
+  padding-top: 30px
 
 .stories
   gap: 50px
@@ -30,6 +31,10 @@
   gap: 15px
   position: relative
 
+  span.score
+    display: flex
+    align-items: center
+
   & > span:not(:last-child):after
     content: '/'
     position: relative
@@ -38,16 +43,3 @@
 .mainTitle
   font-size: 64px
   flex-grow: 2
-
-.spin
-  animation: 2s spin infinite
-
-@keyframes spin 
-  0%
-    transform: rotate(0)
-  
-  50%
-    transform: rotate(-180deg)
-  
-  100%
-    transform: rotate(-360deg)
